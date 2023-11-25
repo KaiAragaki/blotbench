@@ -107,10 +107,12 @@ add_imgs <- function(wb, imgs) {
 }
 
 col_index_imgs <- function(wb, j) {
-  lanes <- nrow(col_annot(wb))
-  if (any(j < 0)) {
-    j <- setdiff(1:lanes, abs(j))
-  }
+  if (is.null(j)) return(imgs(wb))
+
+  lanes <- get_nlanes(wb)
+
+  if (any(j < 0)) j <- setdiff(1:lanes, abs(j))
+
   lane_width <- get_widest_img_size(wb) / lanes
   working_img <- magick::image_blank(width = 0, height = 0) |>
     magick::image_convert("png")
@@ -122,9 +124,4 @@ col_index_imgs <- function(wb, j) {
     )
   }
   working_img
-}
-
-get_widest_img_size <- function(wb) {
-  info <- magick::image_info(imgs(wb))
-  max(info$width)
 }

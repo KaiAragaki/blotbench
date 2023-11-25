@@ -45,3 +45,16 @@ wb <- function(imgs, col_annot, row_annot) {
 
   new_wb(list(imgs = imgs, row_annot = ra, col_annot = ca))
 }
+
+get_lane_width <- function(wb) {
+  get_widest_img_size(wb) / get_nlanes(wb)
+}
+
+get_nlanes <- function(wb) {
+  nrow(col_annot(wb))
+}
+
+get_widest_img_size <- function(wb) {
+  info <- magick::image_info(imgs(wb))
+  max(info$width)
+}

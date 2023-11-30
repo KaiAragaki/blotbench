@@ -8,7 +8,7 @@ edit_blot <- function(usr_wb) {
         controlsUI("controls")
       ),
       shiny::mainPanel(
-        shiny::imageOutput("imgs", height = 500),
+        blotUI("controls")
       )
     )
   )
@@ -16,7 +16,7 @@ edit_blot <- function(usr_wb) {
     curIdx <- curIdxServer("curIdx", usr_wb)
     controls <- controlsServer("controls")
     allTrans <- allTransServer("allTrans", usr_wb, curIdx, controls)
-    curTrans <- curTransServer("controls", curIdx, allTrans)
+    curTrans <- curTransServer("controls", usr_wb, curIdx, allTrans)
   }
   shiny::shinyApp(ui, server)
 }

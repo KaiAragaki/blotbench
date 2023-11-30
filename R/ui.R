@@ -29,32 +29,7 @@ curIdxUI <- function(id, usr_wb) {
   )
 }
 
-
-
 #' @importFrom shiny NS
 blotUI <- function(id) {
   shiny::imageOutput(NS(id, "img"), height = 500)
-}
-
-make_ui <- function(df, id) {
-  list(
-    shiny::numericInput(
-      id, "width", min = 0, value = df$width
-    ),
-    shiny::numericInput(
-      id, "height", min = 0, value = df$height
-    ),
-    shiny::numericInput(
-      id, "xpos", min = 0, value = df$xpos
-    ),
-    shiny::numericInput(
-      id, "ypos", min = 0, value = df$ypos
-    ),
-    shiny::numericInput(
-      id, "rotate", min = 0, value = df$rotate
-    ),
-    shiny::checkboxInput(
-      id, "flip", value = df$flip
-    )
-  )
 }

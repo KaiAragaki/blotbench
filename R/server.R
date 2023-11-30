@@ -44,16 +44,14 @@ allTransServer <- function(id, usr_wb, curIdx, controls) {
   })
 }
 
-curTransServer <- function(id, curIdx, allTrans) {
+curTransServer <- function(id, usr_wb, curIdx, allTrans) {
   shiny::moduleServer(id, function(input, output, session) {
     curTrans <- shiny::reactive({
       at <- allTrans$tf
-      print(curIdx())
       at[curIdx(), ]
     })
 
     shiny::observeEvent(curTrans(), {
-      print(curTrans())
       shiny::updateNumericInput(session, "width", value = curTrans()[[1]])
       shiny::updateNumericInput(session, "height", value = curTrans()[[2]])
       shiny::updateNumericInput(session, "xpos", value = curTrans()[[3]])
@@ -62,6 +60,27 @@ curTransServer <- function(id, curIdx, allTrans) {
       shiny::updateCheckboxInput(session, "flip", value = curTrans()[[6]])
     })
 
+    output$img <- shiny::renderImage({
+      outfile <- tempfile(fileext = ".png")
+      crop_geom <- magick::geometry_area(
+        width = input$width, height = input$height,
+        x_off = input$xpos, y_off = input$ypos
+      )
+
+      img <- imgs(usr_wb)[curIdx()]
+      img <- magick::image_rotate(
+        img, degrees = input$rotate
+      ) |>
+        magick::image_crop(geometry = crop_geom)
+
+      if (input$flip) img <- magick::image_flop(img)
+
+      magick::image_write(img, format = "png", path = outfile)
+      # Return a list containing information about the image
+      list(src = outfile,
+           contentType = "image/png",
+           alt = "This is alternate text")
+    }, deleteFile = TRUE)
   })
 }
 

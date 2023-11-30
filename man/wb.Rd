@@ -4,15 +4,18 @@
 \alias{wb}
 \title{Create a wb object}
 \usage{
-wb(imgs, col_annot, row_annot)
+wb(imgs, col_annot = data.frame(), row_annot, transforms = NULL)
 }
 \description{
 A wb object has several fields:
 \itemize{
-\item \code{imgs}: A \code{magick-image}
+\item \code{imgs}: A \code{magick-image}, which may include one more images
 \item \code{col_annot}: A \code{data.frame}, where each row is a lane and each
 column is a condition
 \item \code{row_annot}: A \code{data.frame}, where each row is a band and the first column
 contains band names
+\item \code{transform}: A \code{data.frame}, where each row contains image transformation
+parameters for an item in \code{imgs}. Usually left blank unless you know what
+you're doing
 }
 }

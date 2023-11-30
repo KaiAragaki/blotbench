@@ -16,6 +16,7 @@ col_annot.wb <- function(x) {
 #' @export
 `col_annot<-.wb` <- function(x, value) {
   x$col_annot <- value
+  x
 }
 
 # Generate header for colname annotation

@@ -16,4 +16,5 @@ row_annot.wb <- function(x) {
 #' @export
 `row_annot<-.wb` <- function(x, value) {
   x$row_annot <- value
+  x
 }

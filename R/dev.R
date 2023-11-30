@@ -3,12 +3,14 @@ test_wb <- function() {
     "Raw Data/ChemiDoc/aragaki-kai/2022-03-23_erda-dr/trail-parp-actin.tif"
   ) |>
     magick::image_read()
+  frink <- magick::image_read("https://jeroen.github.io/images/frink.png")
+
   ca <- data.frame(
     drug = "erda",
     conc_nm = c(0, 1, 10, 100, 1000, 10000)
   )
-  ra <- data.frame(name = "TRAIL")
-  wb(img, ca, ra)
+  ra <- data.frame(name = c("TRAIL", "Frink"))
+  wb(c(img, frink), ca, ra)
 }
 # Note - if a flip occurs in the editor, it should suggest a flip for coldata
 

@@ -32,15 +32,15 @@ validate_wb <- function(x) {
 wb <- function(imgs,
                col_annot = data.frame(),
                row_annot,
-               transform = NULL) {
+               transforms = NULL) {
 
-  if (is.null(transform)) transform <- default_transform(imgs)
+  if (is.null(transforms)) transforms <- default_transforms(imgs)
 
   list(
     imgs = imgs,
     col_annot = col_annot,
     row_annot = row_annot,
-    transform = transform
+    transforms = transforms
   ) |>
     new_wb() |>
     validate_wb()
@@ -81,16 +81,4 @@ get_widest_img_size <- function(wb) {
 
 wb_view <- function(wb) {
   magick::image_browse(imgs(wb))
-}
-
-default_transform <- function(imgs) {
-  info <- magick::image_info(imgs)
-  data.frame(
-    width = info$width,
-    height = info$height,
-    xpos = 0,
-    ypos = 0,
-    rotate = 0,
-    rotate = FALSE
-  )
 }

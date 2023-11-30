@@ -16,6 +16,7 @@ imgs.wb <- function(x) {
 #' @export
 `imgs<-.wb` <- function(x, value) {
   x$imgs <- value
+  x
 }
 
 #' Add an image to a wb object

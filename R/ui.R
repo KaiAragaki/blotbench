@@ -33,3 +33,9 @@ curIdxUI <- function(id, usr_wb) {
 blotUI <- function(id) {
   shiny::imageOutput(NS(id, "img"), height = 500)
 }
+
+doneUI <- function(id) {
+  shiny::actionButton(
+    shiny::NS(id, "done"), "Done"
+  )
+}

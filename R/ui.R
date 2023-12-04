@@ -1,22 +1,22 @@
 controlsUI <- function(id) {
   shiny::tagList(
     shiny::numericInput(
-      shiny::NS(id, "width"), "width", min = 0, value = 0
+      shiny::NS(id, "width"), "Width", min = 0, value = 0
     ),
     shiny::numericInput(
-      shiny::NS(id, "height"), "height", min = 0, value = 0
+      shiny::NS(id, "height"), "Height", min = 0, value = 0
     ),
     shiny::numericInput(
-      shiny::NS(id, "xpos"), "xpos", min = 0, value = 0
+      shiny::NS(id, "xpos"), "X-offset (from left)", min = 0, value = 0
     ),
     shiny::numericInput(
-      shiny::NS(id, "ypos"), "ypos", min = 0, value = 0
+      shiny::NS(id, "ypos"), "Y-offset (from top)", min = 0, value = 0
     ),
     shiny::numericInput(
-      shiny::NS(id, "rotate"), "rotate", min = 0, value = 0
+      shiny::NS(id, "rotate"), "Rotation", min = 0, value = 0
     ),
     shiny::checkboxInput(
-      shiny::NS(id, "flip"), "flip", value = FALSE
+      shiny::NS(id, "flip"), "Flip? (Horizontal)", value = FALSE
     )
   )
 }

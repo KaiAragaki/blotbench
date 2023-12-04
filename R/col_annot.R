@@ -60,44 +60,47 @@ get_text_height <- function(img, labels, text_size) {
   height
 }
 
-# Should make a free floating img that can be 'rbind'ed to existing wb imgs
-make_col_annot_img <- function(wb, col_idx, text_size) {
+make_col_annot <- function(wb) {
+  annot <- col_annot(wb)
+  row_height <- 1 / ncol(annot)
 
-  labels <- col_annot(wb)[[col_idx]]
-  imgs <- imgs(wb)
+  grid.newpage()
+  # each row is a condiion in col_annot
+  # two cols - one is to hold the lane labels, the other labels the rows
+  pushViewport(viewport(layout = grid.layout(ncol(annot), 2)))
 
-  block_sizes <- get_block_sizes(wb, labels)
-  block_labels <- rle(labels)$values
+  for (i in seq_len(ncol(annot))) {
+    labels <- annot[[i]]
+    rle <- rle(labels)
+    block_sizes <- rle$lengths
+    block_labels <- rle$values
+    block_sizes <- block_sizes / sum(block_sizes)
+    block_borders <- cumsum(block_sizes)
+    block_borders <- c(0, block_borders)[seq_along(block_borders)]
 
-  text_size <- get_new_text_size(
-    imgs,
-    labels = block_labels,
-    block_sizes = block_sizes,
-    text_size = text_size
-  )
-
-  text_height <- get_text_height(
-    imgs,
-    labels = labels,
-    text_size = text_size
-  )
-
-  block_borders <- c(0, cumsum(block_sizes))
-  dev.new(max(block_borders), max(text_height), unit = "mm")
-  # Using grid, I can specify all rects and text at once (since the grobs can be
-  # vectorized)
-  # https://ggplot2-book.org/ext-springs.html#an-introduction-to-grid
-  for (i in 1:(length(block_borders) - 1)) {
-    rectGrob(
-      width = unit(block_borders[i + 1] - block_borders[i], "mm"),
-      height = unit(text_height, "mm")
+    pushViewport(viewport(layout.pos.row = i, layout.pos.col = 1))
+    grid.rect(
+      block_borders,
+      width = block_sizes,
+      just = "left",
+      gp = gpar(col = "red")
     )
-    textGrob(
-      block_labels[1],
-      x = unit((block_borders[i] + block_borders[i + 1]) / 2, "mm")
+
+    grid.text(
+      block_labels,
+      x = block_borders + (block_sizes / 2),
+      y = unit(0.5, "npc")
     )
+    upViewport()
+
+    pushViewport(viewport(layout.pos.row = i, layout.pos.col = 2))
+    grid.text(
+      annot[i] |> names(),
+      just = "left",
+      x = 0.1
+    )
+    upViewport()
   }
-  p
 }
 
 get_block_sizes <- function(wb, labels) {

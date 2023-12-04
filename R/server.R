@@ -93,7 +93,6 @@ curBlotImgServer <- function(id, wbData, curBlotIdx) {
 doneServer <- function(id, allTrans) {
   shiny::moduleServer(id, function(input, output, session) {
     shiny::observeEvent(input$done, {
-      print("pressed")
       shiny::stopApp(allTrans$tf)
     })
   })

@@ -18,3 +18,19 @@ row_annot.wb <- function(x) {
   x$row_annot <- value
   x
 }
+
+make_row_annot <- function(wb) {
+  annot <- row_annot(wb)
+  y <- seq(from = 0, to = 1, by = 1 / nrow(annot))
+  diff <- diff(y)
+  y <- y[1:(length(y) - 1)]
+  y <- y + diff / 2
+  y <- rev(y) # to be same order as wb
+  grid.newpage()
+  grid.text(
+    row_annot(wb)[[1]],
+    just = "right",
+    y,
+    x = 0.9
+  )
+}

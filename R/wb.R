@@ -82,3 +82,9 @@ get_widest_img_size <- function(wb) {
 wb_view <- function(wb) {
   magick::image_browse(imgs(wb))
 }
+
+wb_present <- function(wb) {
+  ca <- make_col_annot(wb)
+  ra <- make_row_annot(wb)
+  imgs <- apply_transform(wb)
+}

@@ -21,7 +21,7 @@ edit_blot <- function(wb) {
     done <- doneServer("done", allTrans)
   }
 
-  transforms_to_apply <- runApp(shiny::shinyApp(ui, server))
+  transforms_to_apply <- shiny::runApp(shiny::shinyApp(ui, server))
   cat(
     "Paste in your script to crop the images as seen in the app:\n",
     "transforms(", deparse(substitute(wb)), ") <- ",

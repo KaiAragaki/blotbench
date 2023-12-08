@@ -35,7 +35,7 @@ apply_transform <- function(wb) {
   transforms <- transforms(wb)
   imgs <- imgs(wb)
 
-  # Applying in image magick is weird
+  # Applying in magick is weird
   # This is the easiest way:
   new_imgs <- c()
   for (i in seq_along(imgs(wb))) {

@@ -63,7 +63,7 @@ wb <- function(imgs,
   new_wb(list(imgs = imgs,
               row_annot = ra,
               col_annot = ca,
-              transform = tf))
+              transforms = tf))
 }
 
 get_lane_width <- function(wb) {
@@ -84,7 +84,13 @@ wb_view <- function(wb) {
 }
 
 wb_present <- function(wb) {
-  ca <- make_col_annot(wb)
-  ra <- make_row_annot(wb)
   imgs <- apply_transform(wb)
+  img <- magick::image_append(imgs, stack = TRUE)
+  info <- magick::image_info(img)
+  ca_path <- tempfile()
+  png(ca_path, width = info$width, res = 30)
+  make_col_annot(wb)
+  dev.off()
+  ca <- magick::image_read(ca_path)
+  ra <- make_row_annot(wb)
 }

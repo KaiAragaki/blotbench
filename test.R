@@ -108,13 +108,3 @@ top_annot_row <- function(ca_col) {
     textGrob(rle$values, x = mids)
   )
 }
-
-
-test_transforms <- function(wb) {
-  transforms(wb) <- tibble::tribble(
-    ~width, ~height, ~xpos, ~ypos, ~rotate, ~flip,
-    270L,     50L,   260,    55,     1.5,  TRUE,
-    220L,    445L,     0,     0,       0, FALSE
-  )
-  wb
-}

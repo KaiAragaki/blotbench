@@ -24,3 +24,12 @@ test_input <- function() {
     flip = TRUE
   )
 }
+
+test_transforms <- function(wb) {
+  transforms(wb) <- tibble::tribble(
+    ~width, ~height, ~xpos, ~ypos, ~rotate, ~flip,
+    270L,     50L,   260,    55,     1.5,  TRUE,
+    220L,    445L,     0,     0,       0, FALSE
+  )
+  wb
+}

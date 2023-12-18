@@ -21,6 +21,7 @@ get_layout <- function(wb) {
 }
 
 present_wb <- function(wb) {
+  wb <- apply_transform(wb)
   img <- finalize_blot(wb)
   header <- make_header(wb)
   header_titles <- make_header_titles(wb)
@@ -65,7 +66,8 @@ present_wb <- function(wb) {
     ar = info$width / info$height,
     children = gList(img, header, side, header_titles),
     cl = "western_img", vp = viewport()
-  )
+  ) |>
+    grid.draw()
 }
 
 #' @export

@@ -44,6 +44,8 @@ apply_transform <- function(wb) {
     )
   }
   new_imgs
+  # Recalculate transformations
+  wb(new_imgs, col_annot(wb), row_annot(wb))
 }
 
 transform_blot <- function(img, tf) {

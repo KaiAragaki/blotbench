@@ -1,0 +1,36 @@
+---
+title: "usage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(blotbench)
+```
+
+# Introduction
+
+When preparing western blots for presentation, typical workflows at one point usually involve cropping the blots in something like PhotoShop, GIMP, FIJI, etc. Because this manipulation was done in a separate program, usually the best we can do in terms of reproducibility is by providing the original, unmodified images along with the cropped version. 
+
+This is fine - it certainly is convenient and I don't blame anyone for doing it (particularly busy scientists). There are methods for declaratively doing image manipulations in R (particularly `magick` and `EBImage`), but they aren't nearly as convenient as the real-time visual feedback of typical photo-editing software - the guess-then-render-repeat loop of trying to find the perfect cropping geometry for an image *without* this visual feedback is tedious at best, and a hard-sell if you're trying to get others to join the reproducibility movement.
+
+`blotbench` attempts to solve this by providing a `Shiny` app within the package to perform rudimentary image manipulations with visual feedback. This app outputs code that should be written to create these transformations (rather than the image itself) so the declarative and reproducible benefits of a script can be reaped while still leveraging the convenience of a graphical interface.
+
+In addition, `blotbench` introduces a new object (a `wb` object) that can store row and column annotation much like a `SummarizedExperiment`. This provides additional benefits such as intuitive indexing (to allow you to treat a blot image almost like a `data.frame`) and automatic annotation.
+
+# Creating a `wb` object
+
+
+```{r}
+
+```

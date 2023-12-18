@@ -57,6 +57,7 @@ wb <- function(imgs,
   if (!is.null(j)) ca <- ca[j, , drop = FALSE]
   if (!is.null(i)) tf <- tf[i, , drop = FALSE]
 
+  x <- apply_transform(x)
   imgs <- col_index_imgs(x, j)
   if (!is.null(i)) imgs <- imgs[i]
 

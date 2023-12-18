@@ -25,7 +25,7 @@ get_blot_h <- function(wb) {
 }
 
 get_blot_hs <- function(wb) {
-  tf <- apply_transform(wb)
+  tf <- apply_transform(wb) |> imgs()
 
   # Get the height they'll be when both stretched to the same width:
   # make sure this is applicable to many different imgs
@@ -59,6 +59,7 @@ make_blot <- function(wb) {
 finalize_blot <- function(wb) {
   wb |>
     apply_transform() |>
+    imgs() |>
     magick::image_apply(magick::image_resize, get_widest_img_size(wb)) |>
     magick::image_append(stack = TRUE)
 }

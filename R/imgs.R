@@ -114,15 +114,19 @@ col_index_imgs <- function(wb, j) {
 
   if (any(j < 0)) j <- setdiff(1:lanes, abs(j))
 
-  lane_width <- get_widest_img_size(wb) / lanes
-  working_img <- magick::image_blank(width = 0, height = 0) |>
-    magick::image_convert("png")
-  og_img <- imgs(wb)
-  for (item in j) {
-    left <- (item - 1) * lane_width
-    working_img <- magick::image_append(
-      c(working_img, magick::image_crop(og_img, paste0(lane_width, "x+", left)))
-    )
-  }
-  working_img
+  new_imgs <- imgs(wb)
+  out <- lapply(new_imgs, \(x, j, lanes) col_index_img(x, j, lanes), j = j, lanes = lanes)
+  Reduce(c, out)
+}
+
+col_index_img <- function(img, j, lanes) {
+  w <- magick::image_info(img)$width
+  lw <- w / lanes
+  lapply(
+    (j - 1) * lw,
+    \(x, img) magick::image_crop(img, paste0(lw, "x+", x)),
+    img = img
+  ) |>
+    Reduce(c, x = _) |>
+    magick::image_append()
 }

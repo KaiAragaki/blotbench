@@ -1,3 +1,25 @@
+
+mis <- list(imgs = c(logo, logo))
+
+library(magick)
+
+cutter <- function(imgs) {
+  for (i in seq_along(imgs)) {
+    img <- magick::image_crop(imgs[i], "100")
+    imgs[i] <- img
+  }
+  imgs
+}
+
+image_info(logo)
+image_info(cutter(logo))
+image_info(logo)
+
+cutter2 <- function(imgs) {
+  lapply(imgs, \(x) image_crop(x, "100"))
+}
+
+
 make_col_annot_layout <- function() {
   # One col for the actual annotations, the other for the names of of each
   # column
@@ -8,7 +30,7 @@ make_col_annot_layout <- function() {
   )
 }
 
-present_wb <- function(wb) {
+present_wb_test <- function(wb) {
   # Annotation "block" dimensions cannot be calculated in isolation
   # They all need to be calculated with each other. With those dimensions,
   # we can then create annotation blocks individually.
@@ -66,45 +88,3 @@ produce_wb_img <- function(wb) {
   fg
 }
 
-top_annot_layout <- function(wb) {
-  ca <- col_annot(wb)
-  heights <- vec_to_grob_heights(colnames(ca)) + unit(0.2, "lines")
-  grid.layout(nrow = ncol(col_annot(wb)), ncol = 1, heights = heights)
-}
-
-top_annot <- function(wb) {
-  fg <- frameGrob(layout = top_annot_layout(wb))
-  for (i in seq_len(ncol(col_annot(wb)))) {
-    tar <- top_annot_row(col_annot(wb)[[i]])
-    fg <- placeGrob(
-      fg,
-      rectGrob(),
-      row = i,
-      col = 1
-    )
-    fg <- placeGrob(
-      fg,
-      tar[[1]],
-      row = i,
-      col = 1
-    )
-    fg <- placeGrob(
-      fg,
-      tar[[2]],
-      row = i,
-      col = 1
-    )
-  }
-  fg
-}
-
-top_annot_row <- function(ca_col) {
-  rle <- rle(ca_col)
-  sizes <- rle$lengths / sum(rle$lengths)
-  boundaries <- cumsum(sizes)
-  mids <- boundaries - sizes / 2
-  gList(
-    segmentsGrob(x0 = boundaries, x1 = boundaries),
-    textGrob(rle$values, x = mids)
-  )
-}

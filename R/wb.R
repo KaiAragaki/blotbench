@@ -60,10 +60,9 @@ wb <- function(imgs,
   imgs <- col_index_imgs(x, j)
   if (!is.null(i)) imgs <- imgs[i]
 
-  new_wb(list(imgs = imgs,
-              row_annot = ra,
-              col_annot = ca,
-              transforms = tf))
+  wb(imgs = imgs,
+     row_annot = ra,
+     col_annot = ca)
 }
 
 get_lane_width <- function(wb) {

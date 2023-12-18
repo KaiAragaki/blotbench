@@ -5,7 +5,7 @@ get_side_dims <- function(wb) {
   )
 }
 
-get_side_w <- function(wb, extra = grid::unit(0.2, "lines")) {
+get_side_w <- function(wb, extra = grid::unit(0.5, "lines")) {
   ra <- row_annot(wb)
   ca <- col_annot(wb)
   all_text_vec <- c(ra$name, colnames(ca))
@@ -28,7 +28,7 @@ get_side_hs <- function(wb) {
 
 get_side_layout <- function(wb) {
   grid::grid.layout(
-    nrow = length(row_annot(wb)$name),
+    nrow = nrow(row_annot(wb)),
     ncol = 1,
     heights = get_side_hs(wb),
     widths = get_side_w(wb)
@@ -37,13 +37,13 @@ get_side_layout <- function(wb) {
 
 make_side <- function(wb) {
   names <- row_annot(wb)$name
-  frame <- frameGrob(layout = get_side_layout(wb))
+  frame <- grid::frameGrob(layout = get_side_layout(wb))
   for (i in seq_along(names)) {
     frame <- grid::placeGrob(
       frame, grid::rectGrob(), row = i, col = 1
     )
     frame <- grid::placeGrob(
-      frame, grid::textGrob(names[i]), row = i, col = 1
+      frame, grid::textGrob(names[i], just = "right", x = 0.9), row = i, col = 1
     )
   }
   frame

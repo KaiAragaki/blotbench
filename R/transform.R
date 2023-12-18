@@ -39,7 +39,9 @@ apply_transform <- function(wb) {
   # This is the easiest way:
   new_imgs <- c()
   for (i in seq_along(imgs(wb))) {
-    new_imgs <- image_join(new_imgs, transform_blot(imgs[i], transforms[i, ]))
+    new_imgs <- magick::image_join(
+      new_imgs, transform_blot(imgs[i], transforms[i, ])
+    )
   }
   new_imgs
 }

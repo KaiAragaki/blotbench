@@ -1,16 +1,3 @@
-# I'm making a design choice that everything should take wb as an argument (at
-# least) rather than a derivative (ca, eg)
-get_header_dims <- function(wb) {
-  list(
-    w = get_header_w(wb),
-    h = get_header_h(wb)
-  )
-}
-
-get_header_h <- function(wb) {
-  sum(get_header_hs(wb))
-}
-
 get_header_hs <- function(wb) {
   lapply(
     seq_len(ncol(col_annot(wb))),

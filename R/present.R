@@ -1,25 +1,3 @@
-# Will produce a list of dimensions
-get_dimensions <- function(wb) {
-  blot <- get_blot_dims(wb)
-  top <- get_header_dims(wb)
-  side <- get_side_dims(wb)
-  list(blot = blot, top = top, side = side)
-}
-
-vec_to_grob_heights <- function(vec) {
-  lapply(vec, \(x) grid::grobHeight(textGrob(x))) |>
-    Reduce(unit.c, x = _)
-}
-
-get_layout <- function(wb) {
-  dims <- get_dimensions(wb)
-  grid::grid.layout(
-    2, 2,
-    widths = grid::unit.c(dims$side$w, get_blot_w(wb)),
-    heights = grid::unit.c(dims$top$h, unit(1, "null"))
-  )
-}
-
 present_wb <- function(wb) {
   wb <- apply_transform(wb)
   img <- finalize_blot(wb)

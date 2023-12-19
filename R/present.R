@@ -1,3 +1,9 @@
+#' Render a wb object into an image
+#'
+#' This function takes a wb object and (optionally) row and column annotations
+#' and produces an image from them.
+#'
+#' @param wb A `wb` object with at least images and transformations
 present_wb <- function(wb) {
   wb <- apply_transform(wb)
   img <- finalize_blot(wb)

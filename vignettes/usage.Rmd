@@ -30,6 +30,15 @@ In addition, `blotbench` introduces a new object (a `wb` object) that can store 
 
 # Creating a `wb` object
 
+A `wb` object is composed of 4 components:
+
+1. imgs: A vector of `image-magick` images
+2. col_annot: A `data.frame` containing lane annotation, one line for each column, with the top row referring to the left-most lane
+3. row_annot: A `data.frame` containing names of the protein blotted for in each image. 
+4. transforms: A `data.frame` containing information detailing what transformations should be performed on the image for presentation.
+
+When creating a `wb` object, you typically will not specify the transforms at the outset.
+
 
 ```{r}
 

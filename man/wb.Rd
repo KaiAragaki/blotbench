@@ -4,7 +4,7 @@
 \alias{wb}
 \title{Create a wb object}
 \usage{
-wb(imgs, col_annot = data.frame(), row_annot, transforms = NULL)
+wb(imgs, col_annot = NULL, row_annot = NULL, transforms = NULL)
 }
 \description{
 A wb object has several fields:

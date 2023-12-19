@@ -1,6 +1,11 @@
 present_wb <- function(wb) {
   wb <- apply_transform(wb)
   img <- finalize_blot(wb)
+
+  if (is.null(col_annot(wb)) || is.null(row_annot(wb))) {
+    return(magick::image_browse(img))
+  }
+
   header <- make_header(wb)
   header_titles <- make_header_titles(wb)
   side <- make_side(wb)

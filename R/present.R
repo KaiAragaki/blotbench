@@ -19,52 +19,62 @@ present_wb <- function(wb) {
 
   img <- grid::rasterGrob(
     img,
-    x = grobWidth(side),
-    y = unit(1, "native") - grobHeight(header),
+    x = grid::grobWidth(side),
+    y = grid::unit(1, "native") - grid::grobHeight(header),
     just = c(0, 1),
-    width = unit(1, "native") - grobWidth(side),
-    height = unit(1, "native") - grobHeight(header),
+    width = grid::unit(1, "native") - grid::grobWidth(side),
+    height = grid::unit(1, "native") - grid::grobHeight(header),
     default.units = "native"
   )
-  header$vp <- viewport(
-    x = grobWidth(side),
+  header$vp <- grid::viewport(
+    x = grid::grobWidth(side),
     y = 1,
-    width = unit(1, "native") - grobWidth(side),
-    height = grobHeight(header),
+    width = grid::unit(1, "native") - grid::grobWidth(side),
+    height = grid::grobHeight(header),
     just = c(0, 1),
     default.units = "native"
   )
-  side$vp <- viewport(
+  side$vp <- grid::viewport(
     x = 0,
-    y = unit(1, "native") - grobHeight(header),
-    width = grobWidth(side),
-    height = unit(1, "native") - grobHeight(header),
+    y = grid::unit(1, "native") - grid::grobHeight(header),
+    width = grid::grobWidth(side),
+    height = grid::unit(1, "native") - grid::grobHeight(header),
     just = c(0, 1),
     default.units = "native"
   )
-  header_titles$vp <- viewport(
+  header_titles$vp <- grid::viewport(
     x = 0,
     y = 1,
-    width = grobWidth(side),
-    height = grobHeight(header),
+    width = grid::grobWidth(side),
+    height = grid::grobHeight(header),
     just = c(0, 1),
     default.units = "native"
   )
 
   grid::gTree(
     ar = info$width / info$height,
-    children = gList(img, header, side, header_titles),
-    cl = "western_img", vp = viewport()
+    children = grid::gList(img, header, side, header_titles),
+    cl = "western_img", vp = grid::viewport()
   ) |>
-    grid.draw()
+    grid::grid.draw()
 }
 
+
+#' @importFrom grid makeContext
 #' @export
 makeContext.western_img <- function(x) {
-  vp_w <- convertWidth(x$vp$width, "in", valueOnly = TRUE)
-  vp_h <- convertHeight(x$vp$height, "in", valueOnly = TRUE)
-  header_h <- convertUnit(grobHeight(x$children[[2]]), "in", valueOnly = TRUE)
-  side_w <- convertUnit(grobWidth(x$children[[3]]), "in", valueOnly = TRUE)
+  vp_w <- grid::convertWidth(
+    x$vp$width, "in", valueOnly = TRUE
+  )
+  vp_h <- grid::convertHeight(
+    x$vp$height, "in", valueOnly = TRUE
+  )
+  header_h <- grid::convertUnit(
+    grid::grobHeight(x$children[[2]]), "in", valueOnly = TRUE
+  )
+  side_w <- grid::convertUnit(
+    grid::grobWidth(x$children[[3]]), "in", valueOnly = TRUE
+  )
   img_ratio <- x$ar
   # w/h = ratio => w = ratio * h
   expected_w <- (img_ratio * vp_h) + side_w

@@ -40,7 +40,7 @@ curTransServer <- function(id, usr_wb, curIdx, allTrans) {
       at[curIdx(), ]
     })
 
-    shiny::observeEvent(curTrans(), {
+    shiny::observeEvent(curIdx(), {
       shiny::updateNumericInput(session, "width", value = curTrans()[[1]])
       shiny::updateNumericInput(session, "height", value = curTrans()[[2]])
       shiny::updateNumericInput(session, "xpos", value = curTrans()[[3]])
@@ -52,17 +52,17 @@ curTransServer <- function(id, usr_wb, curIdx, allTrans) {
     output$img <- shiny::renderImage({
       outfile <- tempfile(fileext = ".png")
       crop_geom <- magick::geometry_area(
-        width = input$width, height = input$height,
-        x_off = input$xpos, y_off = input$ypos
+        width = curTrans()$width, height = curTrans()$height,
+        x_off = curTrans()$xpos, y_off = curTrans()$ypos
       )
 
       img <- imgs(usr_wb)[curIdx()]
       img <- magick::image_rotate(
-        img, degrees = input$rotate
+        img, degrees = curTrans()$rotate
       ) |>
         magick::image_crop(geometry = crop_geom)
 
-      if (input$flip) img <- magick::image_flop(img)
+      if (curTrans()$flip) img <- magick::image_flop(img)
 
       magick::image_write(img, format = "png", path = outfile)
       # Return a list containing information about the image

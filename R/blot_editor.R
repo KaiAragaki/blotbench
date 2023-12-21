@@ -1,3 +1,9 @@
+#' Interactively edit blots
+#'
+#' This function helps generate code needed to transform a blot to your
+#' specifications via a Shiny app
+#'
+#' @param wb A `wb` object
 edit_blot <- function(wb) {
   usr_wb <- wb
   ui <- shiny::fluidPage(

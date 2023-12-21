@@ -10,6 +10,9 @@ default_transforms <- function(imgs) {
   )
 }
 
+#' Get and set transforms of a `wb` object
+#'
+#' @param x A `wb` object
 #' @export
 transforms <- function(x) {
   UseMethod("transforms")
@@ -20,6 +23,10 @@ transforms.wb <- function(x) {
   x$transforms
 }
 
+#' @param value A `data.frame` with the same number of rows as `row_annot`, if
+#'   not null, and with columns `width`, `height`, `xpos`, `ypos`, `rotate`, and
+#'   `flip`
+#' @rdname transforms
 #' @export
 `transforms<-` <- function(x, value) {
   UseMethod("transforms<-")
@@ -31,6 +38,13 @@ transforms.wb <- function(x) {
   x
 }
 
+#' Manually apply transforms to imgs
+#'
+#' While functions like `wb_present` will automatically apply transformations,
+#' this function allows you to apply them manually.
+#'
+#' @param wb A `wb` object
+#' @export
 apply_transform <- function(wb) {
   transforms <- transforms(wb)
   imgs <- imgs(wb)

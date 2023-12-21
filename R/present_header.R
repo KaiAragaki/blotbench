@@ -36,9 +36,9 @@ make_header_row <- function(wb, i) {
   boundaries <- cumsum(sizes)
   mids <- boundaries - sizes / 2
   grid::gList(
+    grid::rectGrob(),
     grid::segmentsGrob(x0 = boundaries, x1 = boundaries),
-    grid::textGrob(rle$values, x = mids),
-    grid::rectGrob()
+    grid::textGrob(rle$values, x = mids)
   )
 }
 

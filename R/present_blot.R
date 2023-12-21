@@ -1,5 +1,3 @@
-# It's not necessarily the most efficient way to code, but creating and calling
-# separate get_blot_x functions keeps it consistent between other functions
 get_blot_w <- function(wb) {
   grid::grobWidth(grid::rasterGrob(apply_transform(wb)))
 }
@@ -7,8 +5,6 @@ get_blot_w <- function(wb) {
 get_blot_hs <- function(wb) {
   tf <- apply_transform(wb) |> imgs()
 
-  # Get the height they'll be when both stretched to the same width:
-  # make sure this is applicable to many different imgs
   info <- magick::image_info(tf)
   # old_w * ? = max(info$width)
   info$scaling_factor <- max(info$width) / info$width

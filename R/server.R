@@ -22,24 +22,13 @@ controlsServer <- function(id) {
 
 allTransServer <- function(id, usr_wb, curIdx, controls) {
   shiny::moduleServer(id, function(input, output, session) {
-    # Update transforms from controls...
-    # At the current index...
-    # (if the order is important one may need to appear before the other)
-    # Update vs retrieval?
-    # Start with default value
     tfs <- reactiveValues(tf = transforms(usr_wb))
-
-    # Possible thought if necessary:
-    # What if updating only occurs on curIdx change, and
-    # all of the cropping came from curTrans (or controls?)
     observeEvent({
       controls()
     },{
       tfs$tf[curIdx(), ] <- controls()
       tfs
-      print(tfs$tf)
     })
-    # Need to update controls first, the update allTrans
     tfs
   })
 }

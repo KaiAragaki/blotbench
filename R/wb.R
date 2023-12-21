@@ -13,7 +13,17 @@ new_wb <- function(x = list(imgs = list(),
 }
 
 validate_wb <- function(x) {
-  # Check nrow(row_annot) == nrow(transform) == length(imgs)
+  ra <- row_annot(x)
+  ca <- col_annot(x)
+  tf <- transforms(x)
+
+  if (!any(c(is.null(ra), is.null(ca)))) {
+    if (!(nrow(ra)) == nrow(tf) && nrow(tf) == length(imgs(x))) {
+      rlang::abort(
+        "nrow(row_annot(x)) must equal nrow(transforms(x)) and length(imgs(x))"
+      )
+    }
+  }
   x
 }
 

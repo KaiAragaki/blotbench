@@ -34,7 +34,7 @@ wb_add_img <- function(x, imgs, names) {
 wb_add_img.wb <- function(x, imgs, names) {
   stopifnot(
     is(imgs, "magick-image"),
-    length(imgs) == length(names),
+    is.null(names) || length(imgs) == length(names),
   )
 
   wb |>
@@ -72,6 +72,11 @@ check_all_imgs_same_width <- function(wb, imgs) {
 }
 
 add_names <- function(wb, names) {
+  if (is.null(names)) {
+    if (!is.null(row_annot(wb)))
+      rlang::abort("Argument `names` is NULL but `row_annot` not")
+    return(wb)
+  }
   row_annot(wb) <- rbind(row_annot(wb), data.frame(name = names))
   wb
 }

@@ -32,6 +32,11 @@ make_blot <- function(wb) {
   frame
 }
 
+get_widest_img_size <- function(wb) {
+  info <- magick::image_info(imgs(wb))
+  max(info$width)
+}
+
 finalize_blot <- function(wb) {
   wb |>
     apply_transform() |>

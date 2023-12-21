@@ -88,8 +88,3 @@ get_lane_width <- function(wb) {
 get_nlanes <- function(wb) {
   nrow(col_annot(wb))
 }
-
-get_widest_img_size <- function(wb) {
-  info <- magick::image_info(imgs(wb))
-  max(info$width)
-}

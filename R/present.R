@@ -5,7 +5,7 @@
 #'
 #' @param wb A `wb` object with at least images and transformations
 #' @export
-present_wb <- function(wb) {
+wb_present <- function(wb) {
   wb <- apply_transform(wb)
   img <- finalize_blot(wb)
 

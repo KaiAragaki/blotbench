@@ -4,7 +4,7 @@
 #' specifications via a Shiny app
 #'
 #' @param wb A `wb` object
-edit_blot <- function(wb) {
+wb_visual_edit <- function(wb) {
   usr_wb <- wb
   ui <- shiny::fluidPage(
     shiny::titlePanel("Blot Editor"),

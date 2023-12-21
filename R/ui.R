@@ -29,9 +29,8 @@ curIdxUI <- function(id, usr_wb) {
   )
 }
 
-#' @importFrom shiny NS
 blotUI <- function(id) {
-  shiny::imageOutput(NS(id, "img"), height = 500)
+  shiny::imageOutput(shiny::NS(id, "img"), height = 500)
 }
 
 doneUI <- function(id) {

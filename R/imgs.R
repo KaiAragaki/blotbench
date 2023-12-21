@@ -17,8 +17,9 @@ imgs.wb <- function(x) {
 
 #' @export
 `imgs<-.wb` <- function(x, value) {
-  x$imgs <- value
-  x
+  rlang::abort(
+    "To add an image, use `wb_add_img`. To remove an image, use row indexing."
+  )
 }
 
 #' @param imgs A `magick-image` containing one or more images
@@ -43,35 +44,6 @@ wb_add_img.wb <- function(x, imgs, names) {
     add_imgs(imgs)
 }
 
-#' Drop an image and its band data by name or index
-#'
-#' @param x A `wb` object
-#' @param name Either a numeric representing the index of the image, or a name
-#'   identifying the row_annot row associated with the image.
-#'
-#' @export
-wb_rm_img <- function(x, name) {
-  UseMethod("wb_rm_img")
-}
-
-#' @export
-wb_rm_img.wb <- function(x, name) {
-  stopifnot(is.numeric(name) | is.character(name))
-
-  if (is.numeric(name)) {
-    if (name > length(imgs(x)))
-      cli::cli_abort("Subscript out of bounds")
-    imgs(x) <- imgs(x)[-name]
-    row_annot(x) <- row_annot(x)[-name]
-  }
-
-  if (is.character(name)) {
-    if (!name %in% row_annot(x)$name)
-      cli::cli_abort("{.var name} is not a name in the row_annot of this wb")
-    idx <- which(row_annot(x)$name == name)
-    imgs(x) <- imgs(x)[-idx]
-    row_annot(x) <- row_annot(x)[-idx, ]
-  }
 
   wb
 }

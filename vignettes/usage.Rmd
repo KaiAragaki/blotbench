@@ -37,9 +37,109 @@ A `wb` object is composed of 4 components:
 3. row_annot: A `data.frame` containing names of the protein blotted for in each image. 
 4. transforms: A `data.frame` containing information detailing what transformations should be performed on the image for presentation.
 
-When creating a `wb` object, you typically will not specify the transforms at the outset.
+When creating a `wb` object, you typically will not specify the transforms at the outset, and both `col_annot` and `row_annot` are optional. At bare minimum, you need to supply a vector of `image-magick` images. To show you the full power of `blotbench` though, I'm going to supply arguments 1-3.
 
+First, let's introduce our images.
+
+Our experiment was a timecourse of cells exposed to a drug (erdafitinib - an FGFR inhibitor). We blotted for three proteins - TRAIL, PARP, and Actin.
+
+Here is our PARP blot:
 
 ```{r}
+library(magick)
+parp <- image_read(system.file("extdata", "parp.tif", package = "blotbench"))
+parp
+```
+
+After blotting for PARP, we probed the same blot again for TRAIL:
+
+```{r}
+trail <- image_read(system.file("extdata", "trail.tif", package = "blotbench"))
+trail
+```
+
+And finally for Actin:
+
+```{r}
+actin <- image_read(system.file("extdata", "actin.tif", package = "blotbench"))
+actin
+```
+
+We're also going to create column and row annotations while we're at it. 
+
+Column annotations are probably the most involved, so we'll start with them.
+
+To make the column annotation, create a `data.frame` that has one row per lane in the blot. The columns should represent experimental conditions. The order of the rows should be the order of the columns **after image manipulation**. This is important, as these images are mirrored - we'll flip them the right way once we get on to image manipulation.
+
+```{r}
+ca <- data.frame(
+  drug = c("DMSO", "Erdafitinib", "Erdafitinib", "Erdafitinib"),
+  time_hr = c(0, 24, 48, 72)
+)
+```
+
+Row annotation can be supplied as a `data.frame` with just one column - `name` - or, much more simply, as a character vector, which is what we'll do here. The order should match the order of images.
+
+With that, we have everything we need:
+
+```{r}
+wb <- wb(
+  imgs = c(parp, trail, actin),
+  col_annot = ca,
+  row_annot = c("PARP", "TRAIL", "Actin")
+)
+```
+
+# Editing blots
+
+Now that we have a blot object, we can call `edit_blot` on it to help us generate code to transform out blots:
+
+```{r eval=FALSE}
+edit_blot(wb)
+```
+
+After editing your individual blots and clicking "done", the app will quit and the code to write the transformations will appear in your console:
 
 ```
+Paste in your script to crop the images as seen in the app:
+transforms(wb) <- tibble::tribble(
+  ~width, ~height, ~xpos, ~ypos, ~rotate, ~flip,
+    190L,     60L,   269,    51,    -0.5,  TRUE,
+    190L,     50L,   238,   276,       0,  TRUE,
+    190L,     30L,   283,   206,       0,  TRUE
+  )
+```
+
+Doing so, we get:
+
+```{r}
+transforms(wb) <- tibble::tribble(
+  ~width, ~height, ~xpos, ~ypos, ~rotate, ~flip,
+    190L,     60L,   269,    51,    -0.5,  TRUE,
+    190L,     50L,   238,   276,       0,  TRUE,
+    190L,     30L,   283,   206,       0,  TRUE
+  )
+wb
+```
+
+Note that the transforms have not been *applied*: the `imgs` are still the width and height that they were before updating the transformations. This allows you to re-edit the blots if you so desire. The transformations can manually be applied using `apply_transform`, but they are also automatically applied upon `present_wb`:
+
+```{r}
+present_wb(wb)
+```
+
+You'll note that our annotations have automatically been applied - isn't that nice!
+
+If you want to exclude certain proteins, you can index by row just like a `data.frame`:
+
+```{r}
+present_wb(wb[-2,])
+```
+
+You can additionally select lanes as though they were columns:
+
+```{r}
+present_wb(wb[, 2:4])
+```
+
+In practice, this will allow you to do some pretty un-recommended things - but by providing the code, at least it's auditable.

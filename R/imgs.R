@@ -94,7 +94,12 @@ col_index_imgs <- function(wb, j) {
   if (any(j < 0)) j <- setdiff(1:lanes, abs(j))
 
   new_imgs <- imgs(wb)
-  out <- lapply(new_imgs, \(x, j, lanes) col_index_img(x, j, lanes), j = j, lanes = lanes)
+  out <- lapply(
+    new_imgs,
+    \(x, j, lanes) col_index_img(x, j, lanes),
+    j = j,
+    lanes = lanes
+  )
   Reduce(c, out)
 }
 

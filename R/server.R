@@ -25,7 +25,7 @@ allTransServer <- function(id, usr_wb, curIdx, controls) {
     tfs <- reactiveValues(tf = transforms(usr_wb))
     observeEvent({
       controls()
-    },{
+    }, {
       tfs$tf[curIdx(), ] <- controls()
       tfs
     })

@@ -1,9 +1,7 @@
-## code to prepare `actin` dataset goes here
+## code to prepare `actin`
 library(bladdr)
 
-actin <- get_gbci(
-  "Raw Data/ChemiDoc/aragaki-kai/2022-03-23_erda-tc/parp-trail-actin.tif"
-) |>
-  magick::image_read()
-
-usethis::use_data(actin, overwrite = TRUE)
+get_gbci(
+  "Raw Data/ChemiDoc/aragaki-kai/2022-03-23_erda-tc/parp-trail-actin.tif",
+  dest = "./inst/extdata/actin.tif"
+)

@@ -35,6 +35,8 @@ blotUI <- function(id) {
 
 doneUI <- function(id) {
   shiny::actionButton(
-    shiny::NS(id, "done"), "Done"
+    shiny::NS(id, "done"),
+    "Done",
+    onclick = "setTimeout(function(){window.close();},500);"
   )
 }

@@ -37,13 +37,12 @@ wb_add_img.wb <- function(x, imgs, names) {
     is.null(names) || length(imgs) == length(names),
   )
 
-  wb |>
+  wb <- wb |>
     check_all_names_unique(names) |>
-    check_all_imgs_same_width(imgs) |>
     add_names(names) |>
     add_imgs(imgs)
-}
 
+  validate_wb(wb)
 
   wb
 }
@@ -56,18 +55,6 @@ check_all_names_unique <- function(wb, names) {
   if (any(duplicated(c(wb$row_annot[, 1], names))))
     cli::cli_abort("Duplicate name found between {.code wb} and {.code names}")
 
-  wb
-}
-
-check_all_imgs_same_width <- function(wb, imgs) {
-  all_info <- c(wb$imgs, imgs) |>
-    magick::image_info()
-  if (unique(all_info$width) > 1) {
-    cli::cli_warn(
-      c("Some of images have different widths.",
-        "This may results in strange (and incorrect) annotation.")
-    )
-  }
   wb
 }
 

@@ -1,3 +1,5 @@
+#' Get and set images from a wb object
+#' @param x A `wb` object
 #' @export
 imgs <- function(x) {
   UseMethod("imgs")
@@ -19,10 +21,10 @@ imgs.wb <- function(x) {
   x
 }
 
-#' Add an image to a wb object
-#'
 #' @param imgs A `magick-image` containing one or more images
-#' @param names A character vector of names with lenght equal to imgs
+#' @param names A character vector of names with length equal to `imgs`. Can be
+#'   `NULL` if row_annot is `NULL`
+#' @rdname imgs
 wb_add_img <- function(x, imgs, names) {
   UseMethod("add_img")
 }

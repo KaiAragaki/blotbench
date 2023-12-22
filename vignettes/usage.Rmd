@@ -48,21 +48,21 @@ Here is our PARP blot:
 ```{r}
 library(magick)
 parp <- image_read(system.file("extdata", "parp.tif", package = "blotbench"))
-parp
+plot(parp)
 ```
 
 After blotting for PARP, we probed the same blot again for TRAIL:
 
 ```{r}
 trail <- image_read(system.file("extdata", "trail.tif", package = "blotbench"))
-trail
+plot(trail)
 ```
 
 And finally for Actin:
 
 ```{r}
 actin <- image_read(system.file("extdata", "actin.tif", package = "blotbench"))
-actin
+plot(actin)
 ```
 
 We're also going to create column and row annotations while we're at it. 

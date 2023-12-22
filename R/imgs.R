@@ -1,4 +1,7 @@
 #' Get or set images for a `wb` object
+#'
+#' @details Note that `imgs<-` is unused - add images using `wb_add_img`
+#'
 #' @param x A `wb` object
 #' @export
 imgs <- function(x) {
@@ -10,6 +13,8 @@ imgs.wb <- function(x) {
   x$imgs
 }
 
+#' @param value Unused.
+#' @rdname imgs
 #' @export
 `imgs<-` <- function(x, value) {
   UseMethod("imgs<-")

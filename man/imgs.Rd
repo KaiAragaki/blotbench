@@ -2,15 +2,20 @@
 % Please edit documentation in R/imgs.R
 \name{imgs}
 \alias{imgs}
+\alias{imgs<-}
 \alias{wb_add_img}
 \title{Get or set images for a \code{wb} object}
 \usage{
 imgs(x)
 
+imgs(x) <- value
+
 wb_add_img(x, imgs, names)
 }
 \arguments{
 \item{x}{A \code{wb} object}
+
+\item{value}{Unused.}
 
 \item{imgs}{A \code{magick-image} containing one or more images}
 
@@ -19,4 +24,7 @@ wb_add_img(x, imgs, names)
 }
 \description{
 Get or set images for a \code{wb} object
+}
+\details{
+Note that \verb{imgs<-} is unused - add images using \code{wb_add_img}
 }

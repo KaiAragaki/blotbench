@@ -29,12 +29,11 @@ validate_wb <- function(x) {
 
 #' Create a wb object
 #'
-#' A wb object has several fields:
-#' - `imgs`: A `magick-image`, which may include one more images
-#' - `col_annot`: A `data.frame`, where each row is a lane and each
-#'   column is a condition
-#' - `row_annot`: A `data.frame`, where each row is a band and the first column
-#'   contains band names
+#' @param imgs A vector of `magick-image`s
+#' @param col_annot A `data.frame`, where each row is a lane and each column is
+#'   a condition
+#' @param row_annot A `data.frame`, where each row is a band and the first
+#'   column contains band names
 #' @param transforms A `data.frame`, where each row contains image transformation
 #'   parameters for an item in `imgs`. Typically left blank unless you know what
 #'   you're doing

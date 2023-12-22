@@ -10,7 +10,7 @@ default_transforms <- function(imgs) {
   )
 }
 
-#' Get and set transforms of a `wb` object
+#' Get or set transforms of a `wb` object
 #'
 #' @param x A `wb` object
 #' @export

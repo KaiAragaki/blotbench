@@ -1,4 +1,4 @@
-#' Get or set column annotation for a wb object
+#' Get or set column annotation for a `wb` object
 #' @param x A `wb` object
 #' @export
 col_annot <- function(x) {

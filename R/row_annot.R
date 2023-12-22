@@ -1,4 +1,4 @@
-#' Get or set row annotation for a wb object
+#' Get or set row annotation for a `wb` object
 #' @param x A `wb` object
 #' @export
 row_annot <- function(x) {

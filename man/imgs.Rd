@@ -3,7 +3,7 @@
 \name{imgs}
 \alias{imgs}
 \alias{wb_add_img}
-\title{Get and set images from a wb object}
+\title{Get or set images for a \code{wb} object}
 \usage{
 imgs(x)
 
@@ -18,5 +18,5 @@ wb_add_img(x, imgs, names)
 \code{NULL} if row_annot is \code{NULL}}
 }
 \description{
-Get and set images from a wb object
+Get or set images for a \code{wb} object
 }

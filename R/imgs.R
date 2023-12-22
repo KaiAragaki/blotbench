@@ -1,4 +1,4 @@
-#' Get and set images from a wb object
+#' Get or set images for a `wb` object
 #' @param x A `wb` object
 #' @export
 imgs <- function(x) {

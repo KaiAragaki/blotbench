@@ -3,7 +3,7 @@
 \name{row_annot}
 \alias{row_annot}
 \alias{row_annot<-}
-\title{Get or set row annotation for a wb object}
+\title{Get or set row annotation for a \code{wb} object}
 \usage{
 row_annot(x)
 
@@ -16,5 +16,5 @@ row_annot(x) <- value
 character vector}
 }
 \description{
-Get or set row annotation for a wb object
+Get or set row annotation for a \code{wb} object
 }

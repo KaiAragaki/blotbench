@@ -3,7 +3,7 @@
 \name{transforms}
 \alias{transforms}
 \alias{transforms<-}
-\title{Get and set transforms of a \code{wb} object}
+\title{Get or set transforms of a \code{wb} object}
 \usage{
 transforms(x)
 
@@ -17,5 +17,5 @@ not null, and with columns \code{width}, \code{height}, \code{xpos}, \code{ypos}
 \code{flip}}
 }
 \description{
-Get and set transforms of a \code{wb} object
+Get or set transforms of a \code{wb} object
 }

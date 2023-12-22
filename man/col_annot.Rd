@@ -3,7 +3,7 @@
 \name{col_annot}
 \alias{col_annot}
 \alias{col_annot<-}
-\title{Get or set column annotation for a wb object}
+\title{Get or set column annotation for a \code{wb} object}
 \usage{
 col_annot(x)
 
@@ -18,5 +18,5 @@ annotate the lanes left-to-right AFTER image manipulation, which might
 include mirroring.}
 }
 \description{
-Get or set column annotation for a wb object
+Get or set column annotation for a \code{wb} object
 }

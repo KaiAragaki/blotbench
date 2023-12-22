@@ -38,7 +38,7 @@ wb_add_img <- function(x, imgs, names) {
 #' @export
 wb_add_img.wb <- function(x, imgs, names) {
   stopifnot(
-    is(imgs, "magick-image"),
+    class(imgs) == "magick-image",
     is.null(names) || length(imgs) == length(names),
   )
 

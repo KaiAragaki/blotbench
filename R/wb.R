@@ -4,7 +4,7 @@ new_wb <- function(x = list(imgs = list(),
                             transforms = data.frame())) {
   stopifnot(
     is.list(x),
-    is(x$imgs, "magick-image"),
+    class(x$imgs) == "magick-image",
     is.data.frame(x$col_annot) || is.null(x$col_annot),
     is.data.frame(x$row_annot) || is.null(x$row_annot),
     is.data.frame(x$transforms)

@@ -95,7 +95,7 @@ wb <- wb(
 Now that we have a blot object, we can call `edit_blot` on it to help us generate code to transform out blots:
 
 ```{r eval=FALSE}
-edit_blot(wb)
+wb_visual_edit(wb)
 ```
 
 After editing your individual blots and clicking "done", the app will quit and the code to write the transformations will appear in your console:
@@ -125,7 +125,7 @@ wb
 Note that the transforms have not been *applied*: the `imgs` are still the width and height that they were before updating the transformations. This allows you to re-edit the blots if you so desire. The transformations can manually be applied using `apply_transform`, but they are also automatically applied upon `present_wb`:
 
 ```{r}
-present_wb(wb)
+wb_present(wb)
 ```
 
 You'll note that our annotations have automatically been applied - isn't that nice!
@@ -133,13 +133,13 @@ You'll note that our annotations have automatically been applied - isn't that ni
 If you want to exclude certain proteins, you can index by row just like a `data.frame`:
 
 ```{r}
-present_wb(wb[-2,])
+wb_present(wb[-2,])
 ```
 
 You can additionally select lanes as though they were columns:
 
 ```{r}
-present_wb(wb[, 2:4])
+wb_present(wb[, 2:4])
 ```
 
 In practice, this will allow you to do some pretty un-recommended things - but by providing the code, at least it's auditable.

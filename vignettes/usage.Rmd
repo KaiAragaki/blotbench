@@ -92,7 +92,7 @@ wb <- wb(
 
 # Editing blots
 
-Now that we have a blot object, we can call `edit_blot` on it to help us generate code to transform out blots:
+Now that we have a blot object, we can call `wb_visual_edit` on it to help us generate code to transform out blots:
 
 ```{r eval=FALSE}
 wb_visual_edit(wb)

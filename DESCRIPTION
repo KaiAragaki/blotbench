@@ -1,24 +1,34 @@
 Package: blotbench
-Title: What the Package Does (One Line, Title Case)
+Title: Easy, reproducible Westen blot editing
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R:
     person("Kai", "Aragaki", , "adamaragaki@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-9458-0426"))
-Description: What the package does (one paragraph).
+Description:
+    blotbench includes a rudimentary visual image editor that helps you write
+    reproducible, declarative, auditable code for editing western blots.
+    Additionally, it provides tools for easily producing annotated,
+    publication-ready images quickly.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: en
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-Imports: 
+Imports:
+    cli,
     datapasta,
-    grid
-Suggests: 
+    grid,
+    magick,
+    rlang,
+    shiny,
+    tibble
+Suggests:
+    bladdr,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
-Depends: 
+Depends:
     R (>= 2.10)
 LazyData: true
 URL: https://kaiaragaki.github.io/blotbench/

@@ -7,3 +7,5 @@
 ^\.github$
 ^LICENSE\.md$
 .lintr
+^codecov\.yml$
+^README\.Rmd$

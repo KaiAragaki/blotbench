@@ -1,13 +1,13 @@
 get_blot_w <- function(wb) {
   wb |>
-    apply_transform() |>
+    apply_transforms() |>
     grid::rasterGrob() |>
     grid::grobWidth()
 }
 
 get_blot_hs <- function(wb) {
   tf <- wb |>
-    apply_transform() |>
+    apply_transforms() |>
     imgs()
 
   info <- magick::image_info(tf)
@@ -44,7 +44,7 @@ get_widest_img_size <- function(wb) {
 
 finalize_blot <- function(wb) {
   wb |>
-    apply_transform() |>
+    apply_transforms() |>
     imgs() |>
     magick::image_apply(
       magick::image_resize,

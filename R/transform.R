@@ -45,7 +45,7 @@ transforms.wb <- function(x) {
 #'
 #' @param wb A `wb` object
 #' @export
-apply_transform <- function(wb) {
+apply_transforms <- function(wb) {
   transforms <- transforms(wb)
   imgs <- imgs(wb)
 

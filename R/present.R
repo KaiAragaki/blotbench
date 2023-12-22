@@ -6,7 +6,7 @@
 #' @param wb A `wb` object with at least images and transformations
 #' @export
 wb_present <- function(wb) {
-  wb <- apply_transform(wb)
+  wb <- apply_transforms(wb)
   img <- finalize_blot(wb)
 
   if (is.null(col_annot(wb)) || is.null(row_annot(wb))) {

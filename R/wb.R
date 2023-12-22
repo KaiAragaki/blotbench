@@ -1,13 +1,13 @@
 new_wb <- function(x = list(imgs = list(),
                             col_annot = data.frame(),
                             row_annot = data.frame(),
-                            transform = data.frame())) {
+                            transforms = data.frame())) {
   stopifnot(
     is.list(x),
     is(x$imgs, "magick-image"),
     is.data.frame(x$col_annot) || is.null(x$col_annot),
     is.data.frame(x$row_annot) || is.null(x$row_annot),
-    is.data.frame(x$transform)
+    is.data.frame(x$transforms)
   )
   structure(x, class = "wb")
 }
@@ -35,8 +35,8 @@ validate_wb <- function(x) {
 #'   column is a condition
 #' - `row_annot`: A `data.frame`, where each row is a band and the first column
 #'   contains band names
-#' - `transform`: A `data.frame`, where each row contains image transformation
-#'   parameters for an item in `imgs`. Usually left blank unless you know what
+#' @param transforms A `data.frame`, where each row contains image transformation
+#'   parameters for an item in `imgs`. Typically left blank unless you know what
 #'   you're doing
 #' @export
 wb <- function(imgs,
@@ -62,7 +62,7 @@ wb <- function(imgs,
 
   ra <- x$row_annot
   ca <- x$col_annot
-  tf <- x$transform
+  tf <- x$transforms
 
   if (!is.null(i) && !is.null(ra)) ra <- ra[i, , drop = FALSE]
   if (!is.null(j)) {
@@ -73,7 +73,7 @@ wb <- function(imgs,
   }
   if (!is.null(i)) tf <- tf[i, , drop = FALSE]
 
-  x <- apply_transform(x)
+  x <- apply_transforms(x)
   imgs <- col_index_imgs(x, j)
   if (!is.null(i)) imgs <- imgs[i]
 

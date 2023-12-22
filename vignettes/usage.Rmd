@@ -122,7 +122,7 @@ transforms(wb) <- tibble::tribble(
 wb
 ```
 
-Note that the transforms have not been *applied*: the `imgs` are still the width and height that they were before updating the transformations. This allows you to re-edit the blots if you so desire. The transformations can manually be applied using `apply_transform`, but they are also automatically applied upon `present_wb`:
+Note that the transforms have not been *applied*: the `imgs` are still the width and height that they were before updating the transformations. This allows you to re-edit the blots if you so desire. The transformations can manually be applied using `apply_transforms`, but they are also automatically applied upon `present_wb`:
 
 ```{r}
 wb_present(wb)

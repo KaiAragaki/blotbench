@@ -17,5 +17,8 @@ contains band names
 \item \code{transform}: A \code{data.frame}, where each row contains image transformation
 parameters for an item in \code{imgs}. Usually left blank unless you know what
 you're doing
+\item{transforms}{A \code{data.frame}, where each row contains image transformation
+parameters for an item in \code{imgs}. Typically left blank unless you know what
+you're doing}
 }
 }

@@ -17,7 +17,10 @@ validate_wb <- function(x) {
   ca <- col_annot(x)
   tf <- transforms(x)
 
-  if (!any(c(is.null(ra), is.null(ca)))) {
+  if (!all(c(is.null(ra), is.null(ca)))) {
+    if (any(c(is.null(ra), is.null(ca)))) {
+      rlang::abort("Both row_annot and col_annot must be NULL if one is")
+    }
     if (!(nrow(ra)) == nrow(tf) && nrow(tf) == length(imgs(x))) {
       rlang::abort(
         "nrow(row_annot(x)) must equal nrow(transforms(x)) and length(imgs(x))"

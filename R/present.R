@@ -52,6 +52,7 @@ wb_present <- function(wb) {
     default.units = "native"
   )
 
+  grid::grid.newpage()
   grid::gTree(
     ar = info$width / info$height,
     children = grid::gList(img, header, side, header_titles),

@@ -23,5 +23,8 @@ col_annot.wb <- function(x) {
 #' @export
 `col_annot<-.wb` <- function(x, value) {
   x$col_annot <- value
+
+  validate_wb(x)
+
   x
 }

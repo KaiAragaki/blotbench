@@ -22,8 +22,8 @@ controlsServer <- function(id) {
 
 allTransServer <- function(id, usr_wb, curIdx, controls) {
   shiny::moduleServer(id, function(input, output, session) {
-    tfs <- reactiveValues(tf = transforms(usr_wb))
-    observeEvent({
+    tfs <- shiny::reactiveValues(tf = transforms(usr_wb))
+    shiny::observeEvent({
       controls()
     }, {
       tfs$tf[curIdx(), ] <- controls()

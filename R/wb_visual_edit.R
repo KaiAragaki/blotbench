@@ -4,6 +4,7 @@
 #' specifications via a Shiny app
 #'
 #' @param wb A `wb` object
+#' @export
 wb_visual_edit <- function(wb) {
   usr_wb <- wb
   ui <- shiny::fluidPage(

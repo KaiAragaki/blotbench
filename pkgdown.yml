@@ -3,7 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   usage: usage.html
-last_built: 2024-01-04T17:15Z
+last_built: 2024-01-05T15:51Z
 urls:
   reference: https://kaiaragaki.github.io/blotbench/reference
   article: https://kaiaragaki.github.io/blotbench/articles

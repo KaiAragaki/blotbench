@@ -25,7 +25,12 @@ wb_convert_scn <- function(file, dest_name = NULL, overwrite = FALSE) {
     dest_name <- paste0(fs::path_ext_remove(file), ".tif")
 
   cmd <- "bfconvert '{file}' '{dest_name}'"
-  if (overwrite) cmd <- paste(cmd,  "-overwrite")
+
+  if (fs::file_exists(dest_name) && !overwrite) {
+    rlang::abort("File exists and overwrite is not TRUE")
+  }
+
+  if (overwrite) cmd <- paste(cmd, "-overwrite")
   system(glue::glue(cmd))
   dest_name
 }

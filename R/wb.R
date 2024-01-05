@@ -90,3 +90,12 @@ get_lane_width <- function(wb) {
 get_nlanes <- function(wb) {
   nrow(col_annot(wb))
 }
+
+#' Test if the object is a wb
+#'
+#' @param x Object to be tested
+#' @return Logical. `TRUE` if object inherits from the `wb` class
+#' @export
+is_wb <- function(x) {
+  inherits(x, "wb")
+}

@@ -97,7 +97,7 @@ col_index_imgs <- function(wb, j) {
 
 col_index_img <- function(img, j, lanes) {
   w <- magick::image_info(img)$width
-  lw <- w / lanes
+  lw <- ceiling(w / lanes)
   lapply(
     (j - 1) * lw,
     \(x, img) magick::image_crop(img, paste0(lw, "x+", x)),
